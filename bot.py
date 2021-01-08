@@ -1,12 +1,10 @@
-from aiogram import Bot, Dispatcher,executor,types
+import telebot
 TOKEN = '1070685674:AAFSr950QKddJ97GJNf2qAjICFWQSwjo9U8'
-bot = Bot(token=TOKEN)
-dp = Dispatcher(bot)
+bot= telebot.TeleBot(TOKEN)
 
 
-@dp.message_handler(content_types=['text'])
-async def cmd_start(message: types.Message):
-    await bot.send_message(message.chat.id,'Hello')
+@bot.message_handler(commands=['start'])
+def welkome(mess):
+    bot.send_message(mess.chat.id, 'Я работаю')
 
-if __name__ == "__main__":
-    executor.start_polling(dp)
+bot.polling(none_stop=True)
